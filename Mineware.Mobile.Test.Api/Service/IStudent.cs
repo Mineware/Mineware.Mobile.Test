@@ -10,5 +10,7 @@ namespace Mineware.Mobile.Test.Api.Service
 	{
 		Task AddStudent(AddStudentDTO addStudent_Dto);
 		Task<IEnumerable<StudentInfoDTO>> StudentList();
+		Task<StudentInfoDTO> Student(int studentID);
+		Task UpdateStudent(StudentInfoDTO student);
 	}
 }

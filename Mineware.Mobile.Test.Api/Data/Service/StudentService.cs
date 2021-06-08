@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Mineware.Mobile.Test.Api.Data.Models;
 using Mineware.Mobile.Test.Api.Service;
 using Mineware.Mobile.Test.Global.DTOs.Student;
@@ -37,9 +38,32 @@ namespace Mineware.Mobile.Test.Api.Data.Service
 
 		}
 
-		public Task<IEnumerable<StudentInfoDTO>> StudentList()
+		public async Task<StudentInfoDTO> Student(int studentID)
 		{
-			throw new NotImplementedException();
+			var student = await _TestDbContext.tbl_Students.Where(a => a.StudentID == studentID).FirstOrDefaultAsync();
+			var result = new StudentInfoDTO();
+			_mapper.Map(student, result);
+
+			return result;
+		}
+
+		public async Task<IEnumerable<StudentInfoDTO>> StudentList()
+		{
+			var students = await _TestDbContext.tbl_Students.ToListAsync();
+			var result = new List<StudentInfoDTO>();
+			_mapper.Map(students, result);
+
+			return result;
+		}
+
+		public async Task UpdateStudent(StudentInfoDTO student)
+		{
+			var updateStudent = await _TestDbContext.tbl_Students.Where(a => a.StudentID == student.StudentID).FirstOrDefaultAsync();
+			if(updateStudent != null)
+			{
+				_mapper.Map(student, updateStudent);
+				await _TestDbContext.SaveChangesAsync();
+			}
 		}
 	}
 }

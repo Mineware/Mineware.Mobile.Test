@@ -24,5 +24,29 @@ namespace Mineware.Mobile.Test.Api.Controllers
 			await _student.AddStudent(addStudent_Dto);
 			return Ok();
 		}
+
+		[HttpGet]
+		
+		public async Task<IActionResult> AllStudents()
+		{
+			var students = await _student.StudentList();
+			return Ok(students);
+		}
+
+		[HttpGet]
+		[Route("{studentID}")]
+		public async Task<IActionResult> Student(int studentID)
+		{
+			var student = await _student.Student(studentID);
+			return Ok(student);
+		}
+
+
+		[HttpPut]
+		public async Task<IActionResult> Add(StudentInfoDTO updateStudent)
+		{
+			await _student.UpdateStudent(updateStudent);
+			return Ok();
+		}
 	}
 }
