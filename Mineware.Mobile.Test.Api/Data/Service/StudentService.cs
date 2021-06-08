@@ -38,6 +38,13 @@ namespace Mineware.Mobile.Test.Api.Data.Service
 
 		}
 
+		public async Task Delete(int studentID)
+		{
+			var student = await _TestDbContext.tbl_Students.Where(a => a.StudentID == studentID).FirstOrDefaultAsync();
+			_TestDbContext.tbl_Students.Remove(student);
+			await _TestDbContext.SaveChangesAsync();
+		}
+
 		public async Task<StudentInfoDTO> Student(int studentID)
 		{
 			var student = await _TestDbContext.tbl_Students.Where(a => a.StudentID == studentID).FirstOrDefaultAsync();

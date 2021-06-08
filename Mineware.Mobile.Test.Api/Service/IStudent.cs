@@ -12,5 +12,6 @@ namespace Mineware.Mobile.Test.Api.Service
 		Task<IEnumerable<StudentInfoDTO>> StudentList();
 		Task<StudentInfoDTO> Student(int studentID);
 		Task UpdateStudent(StudentInfoDTO student);
+		Task Delete(int studentID);
 	}
 }

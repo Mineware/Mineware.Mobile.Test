@@ -48,5 +48,13 @@ namespace Mineware.Mobile.Test.Api.Controllers
 			await _student.UpdateStudent(updateStudent);
 			return Ok();
 		}
+
+		[HttpDelete]
+		[Route("{studentID}")]
+		public async Task<IActionResult> Delete(int studentID)
+		{
+			await _student.Delete(studentID);
+			return Ok();
+		}
 	}
 }
